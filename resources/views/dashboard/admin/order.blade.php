@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <h1>Riawayat Order</h1>
+    <h1>Riwayat Order</h1>
 
     <table class="table table-striped mt-4">
         <thead>
