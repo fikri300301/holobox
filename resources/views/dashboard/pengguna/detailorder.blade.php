@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('dashboard') }}" class="btn btn-primary">Kembali</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-primary">Kemb li</a>
             <div class="row mt-3">
                 <div class="col-md-4">
                     <img src="{{ asset('storage/paket/' . $data->paket->photo) }}"
@@ -19,6 +19,9 @@
                     <p>Jumlah Foto yang tidak di edit : {{ $data->paket->foto_edit }}</p>
                     <p>Hari dan Tanggal Booking :
                         {{ \Carbon\Carbon::parse($data->tanggal_reservasi)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+                    </p>
+                    <p>Jam Booking :
+                        {{ \Carbon\Carbon::parse($data->tanggal_reservasi)->locale('id')->isoFormat('h H') }}
                     </p>
                     <p>Status Pembayaran : {{ $data->transaction_status }}</p>
                     <form id="checkout-form" action="{{ route('checkout-process') }}" method="POST">

@@ -43,6 +43,12 @@ class OrderController extends Controller
         // Ambil data paket yang dipilih berdasarkan ID
         $paket = Paket::findOrFail($id);
 
+        $existingOrder = Order::where('tanggal_reservasi', $request->input('tanggal_reservasi'))->where('transaction_status', 'paid')->first();
+
+        if ($existingOrder) {
+            return back()->withErrors(['tanggal_reservasi' => 'Tanggal dan jam reservasi sudah terpakai, pilih waktu lain.'])->withInput();
+        }
+
         // Buat order baru
         $order = new Order();
         $order->paket_id = $paket->id;
@@ -50,6 +56,9 @@ class OrderController extends Controller
         $order->harga = $paket->harga_paket;
         $order->tanggal_reservasi = $request->input('tanggal_reservasi');
         $order->transaction_status = 'pending';
+
+
+
 
         // Simpan order ke database
         $order->save();

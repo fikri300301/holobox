@@ -12,6 +12,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailOrderController;
 use App\Http\Controllers\CategoryPaketController;
+use App\Http\Controllers\GaleryController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -36,6 +37,7 @@ Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/kategory-paket/{id}', [CategoryPaketController::class, 'index'])->name('Category.paket');
 Route::get('/paket-detail/{id}', [CategoryPaketController::class, 'detail'])->name('paket.detail');
+Route::get('/galeri-category/{id}', [GaleryController::class, 'galeriCategory'])->name('galeri.categori');
 
 
 // Route untuk dashboard - dapat diakses oleh semua pengguna yang login
@@ -63,6 +65,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
     Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
     Route::get('/riwayat-order-admin', [OrderController::class, 'all'])->name('all.order');
+
+    Route::get('/galery', [GaleryController::class, 'index'])->name('galery.index');
+    Route::get('/galery-add', [GaleryController::class, 'create'])->name('galery.create');
+    Route::post('/galery', [GaleryController::class, 'store'])->name('galery.store');
+    Route::delete('/galery/{id}', [GaleryController::class, 'destroy'])->name('galery.destroy');
 });
 
 //ini contoh route user

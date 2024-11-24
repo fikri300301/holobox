@@ -245,6 +245,31 @@
 
     <!--section project-->
 
+    <div class="projects overflow-hidden" id="project">
+        <div class="container px-4">
+            <div class="project-box">
+                <h1 class="fw-bold mb-3 text-center" style="margin-top: 100px;">galery Kami</h1>
+                <div class="row justify-content-center pt-4 gap-4">
+                    @foreach ($categories as $category)
+                        <div class="col col-md-5 col-12 shadow p-3 rounded mb-4">
+                            <h4 class="pt-4">Galery {{ $category->name }}</h4>
+                            <p>{{ $category->description }}</p>
+                            <div>
+                                <a href="/galeri-category/{{ $category->id }}" class="btn btn-dark"
+                                    style="background-color: rgb(17, 105, 173); border-color: rgb(17, 105, 173);">
+                                    Detail Galery
+                                </a>
+
+                                {{-- <a href="#" class="btn btn-danger" target="_blank">View website</a> --}}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!--section faq-->
     <div class="faq" id="faq">
         <div class="container">

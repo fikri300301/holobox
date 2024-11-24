@@ -12,7 +12,7 @@
 <body>
     <div class="login-container">
         <form class="login-form" action="{{ route('register') }}" method="POST">
-            <img src="{{ asset('storage/logo/holobox-logo.png') }}" alt="Holobox Logo">
+            <img src="{{ asset('gambar/holobox-logo.png') }}" alt="Holobox Logo">
             @csrf
 
             <div class="input-group">

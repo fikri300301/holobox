@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Galery;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -14,5 +15,10 @@ class Category extends Model
     public function paket()
     {
         return $this->hasMany(paket::class, 'category_id', 'id');
+    }
+
+    public function galery()
+    {
+        return $this->hasMany(Galery::class, 'category_id', 'id');
     }
 }

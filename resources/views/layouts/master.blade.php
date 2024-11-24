@@ -146,6 +146,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('galery.index') }}" class="nav-link">
+                        <i class="fas fa-calendar-alt"></i> Galery
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('paket.index') }}" class="nav-link">
                         <i class="fas fa-calendar-alt"></i> Paket
                     </a>
