@@ -57,7 +57,7 @@
                         <a class="nav-link text-white" href="#service">Service</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#project">Project</a>
+                        <a class="nav-link text-white" href="#project">Category</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#faq">FAQ</a>
@@ -250,7 +250,7 @@
             <div class="project-box">
                 <h1 class="fw-bold mb-3 text-center" style="margin-top: 100px;">galery Kami</h1>
                 <div class="row justify-content-center pt-4 gap-4">
-                    @foreach ($categories as $category)
+                    {{-- @foreach ($categories as $category)
                         <div class="col col-md-5 col-12 shadow p-3 rounded mb-4">
                             <h4 class="pt-4">Galery {{ $category->name }}</h4>
                             <p>{{ $category->description }}</p>
@@ -258,12 +258,49 @@
                                 <a href="/galeri-category/{{ $category->id }}" class="btn btn-dark"
                                     style="background-color: rgb(17, 105, 173); border-color: rgb(17, 105, 173);">
                                     Detail Galery
-                                </a>
+                                </a> --}}
 
-                                {{-- <a href="#" class="btn btn-danger" target="_blank">View website</a> --}}
+                    {{-- <a href="#" class="btn btn-danger" target="_blank">View website</a> --}}
+                    {{-- </div>
+                        </div>
+                    @endforeach --}}
+                    <div class="container">
+                        <div class="row justify-content-center gap-4">
+                            @foreach ($data as $dat)
+                                <!-- Setiap Foto dalam Kartu -->
+                                <div class="col-md-4 col-12 shadow p-3 rounded"
+                                    style="width: 300px; border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                                    <!-- Gambar yang Dapat Diklik -->
+                                    <img src="{{ asset('storage/galery/' . $dat->photo) }}"
+                                        class="img-fluid rounded mb-3" alt="{{ $dat->category->name }}"
+                                        style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 15px;"
+                                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                                        data-image="{{ asset('storage/galery/' . $dat->photo) }}"
+                                        data-category="{{ $dat->category->name }}" data-cardwidth="300px"
+                                        data-cardheight="200px">
+
+                                    <h5 class="text-center fw-bold" style="font-size: 16px; margin: 0;">
+                                        {{ $dat->category->name }}
+                                    </h5>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Modal untuk Gambar yang Diperbesar -->
+                    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <!-- Gambar yang Diperbesar Tampil di Sini -->
+                                    <img id="modalImage" src="" alt="" class="img-fluid rounded"
+                                        style="max-width: 100%; height: auto;">
+                                </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -415,7 +452,7 @@
                         <a href="#home" class="text-white text-decoration-none">Home</a>
                         <a href="#about" class="text-white text-decoration-none">About</a>
                         <a href="#service" class="text-white text-decoration-none">Services</a>
-                        <a href="#projek" class="text-white text-decoration-none">Projects</a>
+                        <a href="#projek" class="text-white text-decoration-none">Category</a>
                         <a href="#faq" class="text-white text-decoration-none">FAQ</a>
                     </div>
 
@@ -458,6 +495,31 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();
+    </script>
+    <script>
+        // JavaScript untuk menangani klik pada gambar dan menampilkan di modal
+        document.querySelectorAll('img[data-bs-toggle="modal"]').forEach(function(img) {
+            img.addEventListener('click', function() {
+                // Mengambil sumber gambar yang diklik dan kategori
+                var imageSrc = img.getAttribute('data-image');
+                var imageCategory = img.getAttribute('data-category');
+
+                var modalImage = document.getElementById('modalImage');
+                modalImage.src = imageSrc;
+
+                // Opsional: Mengatur nama kategori pada judul modal
+                var modalLabel = document.getElementById('imageModalLabel');
+                modalLabel.innerText = imageCategory; // Menampilkan nama kategori pada judul modal
+
+                // Mengambil lebar dan tinggi gambar dari kartu untuk menyesuaikan ukuran gambar modal
+                var cardWidth = img.getAttribute('data-cardwidth');
+                var cardHeight = img.getAttribute('data-cardheight');
+
+                // Mengatur ukuran gambar modal agar sesuai dengan ukuran gambar dalam kartu
+                modalImage.style.width = cardWidth; // Menggunakan lebar gambar dari kartu
+                modalImage.style.height = cardHeight; // Menggunakan tinggi gambar dari kartu
+            });
+        });
     </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
