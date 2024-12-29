@@ -10,11 +10,16 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        $galery = Galery::all();
+        // $categories = Category::all();
+        // $galery = Galery::all();
+        // return view('index', [
+        //     'categories' => $categories,
+        //     'data' => $galery
+        // ]);
+        $categories = Category::with('galery')->get(); // Mengambil kategori beserta galeri terkait
+        //dd($categories);
         return view('index', [
             'categories' => $categories,
-            'data' => $galery
         ]);
     }
 }
